@@ -1001,5 +1001,428 @@ mostre-a expressa em dias. Leve em consideração o ano com 365 dias e o mês co
 
 ## ETAPA 2 - PRÁTICA
 
+- 1 - Você deve criar uma classe em Java para representar um carro. A classe deve conter atributos privados para armazenar a marca, o modelo, o ano e a cor do carro. Além disso, você deve implementar métodos públicos para acessar e modificar esses atributos, garantindo o encapsulamento da classe. Por fim, crie um método para exibir as informações do carro.
+- Após criar a classe, crie objetos dessa classe e teste os métodos implementados, modificando e exibindo as informações dos carros criados.
+- Lembre-se de utilizar o encapsulamento adequado para proteger os atributos da classe e garantir o acesso seguro aos mesmos através dos métodos públicos.
+ RESOLUÇÃO
+   
+public class Main {
+    public static void main(String[] args) {
+        Carro carro1 = new Carro("Toyota", "Corolla", 2022, "Prata");
+        Carro carro2 = new Carro("Ford", "Mustang", 2021, "Vermelho");
+
+        System.out.println("Informações do Carro 1:");
+        carro1.exibirInformacoes();
+        System.out.println();
+
+        System.out.println("Informações do Carro 2:");
+        carro2.exibirInformacoes();
+        System.out.println();
+
+        carro1.setAno(2023);
+        carro1.setCor("Azul");
+
+        System.out.println("Informações atualizadas do Carro 1:");
+        carro1.exibirInformacoes();
+    }
+}
 
 
+public class Carro {
+    private String marca;
+    private String modelo;
+    private int ano;
+    private String cor;
+
+    public Carro(String marca, String modelo, int ano, String cor) {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.ano = ano;
+        this.cor = cor;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public int getAno() {
+        return ano;
+    }
+
+    public String getCor() {
+        return cor;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+2 - Desenvolva uma classe em Java para representar um objeto do tipo Produto. Essa classe deve possuir atributos privados para armazenar o nome, o preço e a quantidade em estoque do produto. Implemente métodos públicos para acessar e modificar esses atributos, garantindo o encapsulamento adequado da classe.
+
+Após criar a classe Produto, crie objetos dessa classe e teste os métodos implementados, modificando e exibindo as informações dos produtos criados.
+
+Certifique-se de utilizar o encapsulamento de forma correta, protegendo os atributos da classe e garantindo o acesso seguro a eles através dos métodos públicos disponibilizados.
+
+RESOLUÇÃO
+public class Main {
+    public static void main(String[] args) {
+        Produto produto1 = new Produto("Camiseta", 29.99, 50);
+        Produto produto2 = new Produto("Tênis", 99.99, 20);
+
+        System.out.println("Informações do Produto 1:");
+        produto1.exibirInformacoes();
+        System.out.println();
+
+        System.out.println("Informações do Produto 2:");
+        produto2.exibirInformacoes();
+        System.out.println();
+
+        produto1.setPreco(39.99);
+        produto1.setQuantidadeEmEstoque(40);
+
+        System.out.println("Informações atualizadas do Produto 1:");
+        produto1.exibirInformacoes();
+    }
+}
+
+public class Produto {
+    private String nome;
+    private double preco;
+    private int quantidadeEmEstoque;
+
+    public Produto(String nome, double preco, int quantidadeEmEstoque) {
+        this.nome = nome;
+        this.preco = preco;
+        this.quantidadeEmEstoque = quantidadeEmEstoque;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public int getQuantidadeEmEstoque() {
+        return quantidadeEmEstoque;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
+    public void setQuantidadeEmEstoque(int quantidadeEmEstoque) {
+        this.quantidadeEmEstoque = quantidadeEmEstoque;
+    }
+
+    public void exibirInformacoes() {
+        System.out.println("Nome: " + nome);
+        System.out.println("Preço: R$" + preco);
+        System.out.println("Quantidade em estoque: " + quantidadeEmEstoque);
+    }
+}
+
+3 - Você deve implementar um programa em Java para gerenciar o estoque de uma loja. Para isso, crie uma classe **`Produto`** que representará os produtos disponíveis na loja. Esta classe deve possuir atributos privados para armazenar o nome, o preço e a quantidade em estoque do produto.
+
+Em seguida, implemente métodos públicos na classe **`Produto`** para acessar e modificar esses atributos, garantindo o encapsulamento adequado da classe.
+
+Após criar a classe **`Produto`**, desenvolva um programa principal que permita ao usuário realizar as seguintes operações:
+
+1. Adicionar um novo produto ao estoque, fornecendo o nome, o preço e a quantidade em estoque.
+2. Atualizar o preço ou a quantidade em estoque de um produto existente.
+3. Exibir os detalhes de um produto específico, incluindo seu nome, preço e quantidade em estoque.
+
+Certifique-se de utilizar o encapsulamento de forma correta na classe **`Produto`**, protegendo os atributos da classe e garantindo o acesso seguro a eles através dos métodos públicos disponibilizados.
+
+RESOLUÇÃO
+
+import java.util.Scanner;
+
+public class GerenciadorDeEstoque {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Produto[] estoque = new Produto[100]; // Capacidade máxima do estoque
+
+        int opcao;
+        int contadorProdutos = 0;
+
+        do {
+            System.out.println("\n=== MENU ===");
+            System.out.println("1. Adicionar novo produto");
+            System.out.println("2. Atualizar preço ou quantidade em estoque de um produto");
+            System.out.println("3. Exibir detalhes de um produto");
+            System.out.println("4. Sair");
+            System.out.print("Escolha uma opção: ");
+            opcao = scanner.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    scanner.nextLine(); // Consumir a quebra de linha
+                    System.out.print("Nome do produto: ");
+                    String nome = scanner.nextLine();
+                    System.out.print("Preço: ");
+                    double preco = scanner.nextDouble();
+                    System.out.print("Quantidade em estoque: ");
+                    int quantidadeEmEstoque = scanner.nextInt();
+
+                    estoque[contadorProdutos] = new Produto(nome, preco, quantidadeEmEstoque);
+                    contadorProdutos++;
+                    System.out.println("Produto adicionado com sucesso!");
+                    break;
+
+                case 2:
+                    if (contadorProdutos == 0) {
+                        System.out.println("Nenhum produto cadastrado!");
+                        break;
+                    }
+
+                    System.out.print("Digite o índice do produto que deseja atualizar: ");
+                    int indice = scanner.nextInt();
+                    if (indice < 0 || indice >= contadorProdutos) {
+                        System.out.println("Índice inválido!");
+                        break;
+                    }
+
+                    System.out.println("1. Atualizar preço");
+                    System.out.println("2. Atualizar quantidade em estoque");
+                    System.out.print("Escolha uma opção: ");
+                    int escolha = scanner.nextInt();
+
+                    if (escolha == 1) {
+                        System.out.print("Novo preço: ");
+                        double novoPreco = scanner.nextDouble();
+                        estoque[indice].setPreco(novoPreco);
+                        System.out.println("Preço atualizado com sucesso!");
+                    } else if (escolha == 2) {
+                        System.out.print("Nova quantidade em estoque: ");
+                        int novaQuantidade = scanner.nextInt();
+                        estoque[indice].setQuantidadeEmEstoque(novaQuantidade);
+                        System.out.println("Quantidade em estoque atualizada com sucesso!");
+                    } else {
+                        System.out.println("Opção inválida!");
+                    }
+                    break;
+
+                case 3:
+                    if (contadorProdutos == 0) {
+                        System.out.println("Nenhum produto cadastrado!");
+                        break;
+                    }
+
+                    System.out.print("Digite o índice do produto que deseja exibir: ");
+                    int indiceExibicao = scanner.nextInt();
+                    if (indiceExibicao < 0 || indiceExibicao >= contadorProdutos) {
+                        System.out.println("Índice inválido!");
+                        break;
+                    }
+
+                    Produto produtoExibicao = estoque[indiceExibicao];
+                    System.out.println("\nDetalhes do Produto:");
+                    System.out.println("Nome: " + produtoExibicao.getNome());
+                    System.out.println("Preço: R$" + produtoExibicao.getPreco());
+                    System.out.println("Quantidade em estoque: " + produtoExibicao.getQuantidadeEmEstoque());
+                    break;
+
+                case 4:
+                    System.out.println("Saindo...");
+                    break;
+
+                default:
+                    System.out.println("Opção inválida!");
+            }
+        } while (opcao != 4);
+
+        scanner.close();
+    }
+}
+
+public class Produto {
+    private String nome;
+    private double preco;
+    private int quantidadeEmEstoque;
+
+    public Produto(String nome, double preco, int quantidadeEmEstoque) {
+        this.nome = nome;
+        this.preco = preco;
+        this.quantidadeEmEstoque = quantidadeEmEstoque;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public int getQuantidadeEmEstoque() {
+        return quantidadeEmEstoque;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
+    public void setQuantidadeEmEstoque(int quantidadeEmEstoque) {
+        this.quantidadeEmEstoque = quantidadeEmEstoque;
+    }
+}
+
+4 - **Exercício para Praticar Método Construtor em Java:**
+
+Você deve criar uma classe **`Circulo`** que representará um círculo geométrico. Essa classe deve conter os seguintes atributos privados:
+
+- Raio (do tipo double)
+- Cor (do tipo String)
+
+Implemente um método construtor na classe **`Circulo`** que aceite dois parâmetros: o raio e a cor do círculo. O método construtor deve inicializar os atributos correspondentes com os valores fornecidos como parâmetros.
+
+Após criar a classe **`Circulo`**, desenvolva um programa principal que permita ao usuário criar objetos dessa classe e exibir suas características.
+
+Certifique-se de que o método construtor está sendo utilizado corretamente para inicializar os objetos da classe **`Circulo`** com os valores fornecidos pelo usuário.
+
+Dica: Você pode incluir métodos adicionais na classe **`Circulo`** para calcular a área ou o perímetro do círculo, se desejar.
+RESOLUÇÃO
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Digite o raio do círculo: ");
+        double raio = scanner.nextDouble();
+        scanner.nextLine();
+        System.out.print("Digite a cor do círculo: ");
+        String cor = scanner.nextLine();
+
+        Circulo circulo = new Circulo(raio, cor);
+        circulo.exibirCaracteristicas();
+
+        scanner.close();
+    }
+}
+
+public class Circulo {
+    private double raio;
+    private String cor;
+
+    public Circulo(double raio, String cor) {
+        this.raio = raio;
+        this.cor = cor;
+    }
+
+    public double calcularArea() {
+        return Math.PI * Math.pow(raio, 2);
+    }
+
+    public double calcularPerimetro() {
+        return 2 * Math.PI * raio;
+    }
+
+    public void exibirCaracteristicas() {
+        System.out.println("Círculo com raio " + raio + " e cor " + cor);
+        System.out.println("Área: " + calcularArea());
+        System.out.println("Perímetro: " + calcularPerimetro());
+    }
+}
+
+
+5 - **Exercício para Praticar Múltiplos Construtores em Java:**
+
+Crie uma classe **`Produto`** que representará um produto em uma loja. Essa classe deve conter os seguintes atributos privados:
+
+- Nome (do tipo String)
+- Preço (do tipo double)
+- Quantidade em Estoque (do tipo int)
+
+Implemente múltiplos métodos construtores na classe **`Produto`** para permitir diferentes maneiras de inicializar um objeto **`Produto`**. Os métodos construtores devem ser os seguintes:
+
+1. Um construtor que aceita apenas o nome do produto e inicializa os demais atributos com valores padrão (preço = 0.0 e quantidade em estoque = 0).
+2. Um construtor que aceita o nome e o preço do produto, inicializando a quantidade em estoque com o valor padrão (0).
+3. Um construtor que aceita o nome, o preço e a quantidade em estoque do produto.
+
+Após criar a classe **`Produto`**, desenvolva um programa principal que permita ao usuário criar objetos dessa classe utilizando os diferentes construtores implementados e exibir as características dos produtos criados.
+
+Certifique-se de que os métodos construtores estão sendo utilizados corretamente para inicializar os objetos da classe **`Produto`** com os valores fornecidos pelo usuário.
+RESOLUÇÃO
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Criando produtos utilizando diferentes construtores:");
+
+        Produto produto1 = new Produto("Produto A");
+        System.out.println("\nProduto 1:");
+        produto1.exibirCaracteristicas();
+
+        System.out.print("\nDigite o nome do Produto B: ");
+        String nomeB = scanner.nextLine();
+        System.out.print("Digite o preço do Produto B: ");
+        double precoB = scanner.nextDouble();
+        Produto produto2 = new Produto(nomeB, precoB);
+        System.out.println("\nProduto 2:");
+        produto2.exibirCaracteristicas();
+
+        scanner.nextLine(); // Limpar o buffer do teclado
+        System.out.print("\nDigite o nome do Produto C: ");
+        String nomeC = scanner.nextLine();
+        System.out.print("Digite o preço do Produto C: ");
+        double precoC = scanner.nextDouble();
+        System.out.print("Digite a quantidade em estoque do Produto C: ");
+        int quantidadeC = scanner.nextInt();
+        Produto produto3 = new Produto(nomeC, precoC, quantidadeC);
+        System.out.println("\nProduto 3:");
+        produto3.exibirCaracteristicas();
+
+        scanner.close();
+    }
+}
+
+
+import java.util.Scanner;
+
+class Produto {
+    private String nome;
+    private double preco;
+    private int quantidadeEmEstoque;
+
+    public Produto(String nome) {
+        this.nome = nome;
+        this.preco = 0.0;
+        this.quantidadeEmEstoque = 0;
+    }
+
+    public Produto(String nome, double preco) {
+        this.nome = nome;
+        this.preco = preco;
+        this.quantidadeEmEstoque = 0;
+    }
+
+    public Produto(String nome, double preco, int quantidadeEmEstoque) {
+        this.nome = nome;
+        this.preco = preco;
+        this.quantidadeEmEstoque = quantidadeEmEstoque;
+    }
+
+    public void exibirCaracteristicas() {
+        System.out.println("Nome: " + nome);
+        System.out.println("Preço: " + preco);
+        System.out.println("Quantidade em estoque: " + quantidadeEmEstoque);
+    }
+}
+
+
+FOI MAL, NAO MANJO DO GITHUB AINDA :)
