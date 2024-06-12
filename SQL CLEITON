@@ -1,0 +1,150 @@
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ClienteDAO {
+    
+    private static final String URL = "jdbc:mysql://localhost:3306/seu_banco_de_dados";
+    private static final String USUARIO = "admin";
+    private static final String SENHA = "123321";
+
+    
+    public void inserirCliente(Cliente cliente) {
+        String sql = "INSERT INTO clientes (nome, email, telefone) VALUES (?, ?, ?)";
+
+        try (Connection conn = DriverManager.getConnection(URL, USUARIO, SENHA);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, cliente.getNome());
+            stmt.setString(2, cliente.getEmail());
+            stmt.setString(3, cliente.getTelefone());
+
+            stmt.executeUpdate();
+            System.out.println("Cliente inserido com sucesso!");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void atualizarCliente(Cliente cliente) {
+        String sql = "UPDATE clientes SET nome = ?, email = ?, telefone = ? WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(URL, USUARIO, SENHA);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, cliente.getNome());
+            stmt.setString(2, cliente.getEmail());
+            stmt.setString(3, cliente.getTelefone());
+            stmt.setInt(4, cliente.getId());
+
+            int rowsUpdated = stmt.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Cliente atualizado com sucesso!");
+            } else {
+                System.out.println("Nenhum cliente encontrado com este ID.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Cliente> listarClientes() {
+        List<Cliente> clientes = new ArrayList<>();
+        String sql = "SELECT * FROM clientes";
+
+        try (Connection conn = DriverManager.getConnection(URL, USUARIO, SENHA);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String nome = rs.getString("nome");
+                String email = rs.getString("email");
+                String telefone = rs.getString("telefone");
+
+                Cliente cliente = new Cliente(id, nome, email, telefone);
+                clientes.add(cliente);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return clientes;
+    }
+
+    public void deletarCliente(int id) {
+        String sql = "DELETE FROM clientes WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(URL, USUARIO, SENHA);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+
+            int rowsDeleted = stmt.executeUpdate();
+            if (rowsDeleted > 0) {
+                System.out.println("Cliente deletado com sucesso!");
+            } else {
+                System.out.println("Nenhum cliente encontrado com este ID.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    
+    public static class Cliente {
+        private int id;
+        private String nome;
+        private String email;
+        private String telefone;
+
+        public Cliente(int id, String nome, String email, String telefone) {
+            this.id = id;
+            this.nome = nome;
+            this.email = email;
+            this.telefone = telefone;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public String getNome() {
+            return nome;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public String getTelefone() {
+            return telefone;
+        }
+    }
+
+    
+    public static void main(String[] args) {
+        ClienteDAO dao = new ClienteDAO();
+
+        
+        Cliente novoCliente = new Cliente(0, "Fulano de Tal", "fulano@example.com", "(00) 1234-5678");
+        dao.inserirCliente(novoCliente);
+
+        
+        Cliente clienteExistente = new Cliente(1, "Beltrano da Silva", "beltrano@example.com", "(00) 9876-5432");
+        dao.atualizarCliente(clienteExistente);
+
+        
+        List<Cliente> todosClientes = dao.listarClientes();
+        System.out.println("Lista de clientes:");
+        for (Cliente cliente : todosClientes) {
+            System.out.println(cliente.getId() + ": " + cliente.getNome() + " - " + cliente.getEmail());
+        }
+
+        dao.deletarCliente(2);
+    }
+}
